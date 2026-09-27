@@ -199,11 +199,9 @@ def process_patients(
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse(
+        request,
         "index.html",
-        {
-            "request": request,
-            "default_template": DEFAULT_TEMPLATE,
-        },
+        {"default_template": DEFAULT_TEMPLATE},
     )
 
 
