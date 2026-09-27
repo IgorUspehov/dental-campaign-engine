@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+.env
+uploads/
+data/*.xlsx
+data/*.csv
+reports/*.xlsx
+logs/*.log
+.DS_Store
+*.exe
+dist/
+build/
+*.spec

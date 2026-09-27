@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Campaign Engine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo" data-i18n="logo">Dental Campaign Engine</div>
+        <p class="subtitle" data-i18n="subtitle">Персонализированные рассылки отзывов для стоматологий</p>
+      </div>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn active" data-lang="ru">RU</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="de">DE</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="col">
+        <section class="card">
+          <div class="card-head">
+            <span class="step">1</span>
+            <h2 data-i18n="upload_title">Загрузите список пациентов</h2>
+          </div>
+          <p class="hint" data-i18n="upload_hint">Excel, CSV или TXT. Нужны колонки с именем и телефоном.</p>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="file-input" accept=".xlsx,.xls,.csv,.txt" hidden />
+            <div class="dropzone-content">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <p><span data-i18n="drop_text">Перетащите файл</span> <button type="button" class="link-btn" id="browse-btn" data-i18n="or_browse">или выберите</button></p>
+              <p class="file-types">.xlsx · .xls · .csv · .txt</p>
+            </div>
+            <div class="file-selected" id="file-selected" hidden>
+              <span id="file-name"></span>
+              <button type="button" class="remove-btn" id="remove-file">×</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <span class="step">3</span>
+            <h2 data-i18n="run_title">Запуск</h2>
+          </div>
+          <p class="hint" data-i18n="run_hint">Демо-режим: сообщения не отправляются, только отчёт.</p>
+          <button type="button" class="btn-primary" id="run-btn" disabled>
+            <span class="btn-text" data-i18n="run_btn">Обработать список</span>
+            <span class="btn-loader" hidden data-i18n="processing">Обработка…</span>
+          </button>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="card">
+          <div class="card-head">
+            <span class="step">2</span>
+            <h2 data-i18n="msg_title">Текст сообщения</h2>
+          </div>
+          <p class="hint"><span data-i18n="msg_hint">Плейсхолдер</span> <code>{name}</code> <span data-i18n="msg_hint2">— имя пациента.</span></p>
+          <textarea id="message-template" rows="7" spellcheck="false"></textarea>
+          <button type="button" class="btn-secondary" id="reset-template" data-i18n="reset_btn">Сбросить шаблон</button>
+        </section>
+      </div>
+    </div>
+
+    <section class="card results-card" id="results-section" hidden>
+      <h2 data-i18n="result_title">Результат</h2>
+      <div class="stats" id="stats"></div>
+      <div id="preview-wrap" hidden>
+        <h3 data-i18n="preview_title">Превью</h3>
+        <div class="table-scroll">
+          <table id="preview-table">
+            <thead>
+              <tr>
+                <th data-i18n="th_patient">Пациент</th>
+                <th data-i18n="th_phone">Телефон</th>
+                <th>SMS</th>
+                <th>WhatsApp</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <a class="btn-primary download-btn" id="download-btn" href="#" hidden data-i18n="download_btn">Скачать отчёт (.xlsx)</a>
+    </section>
+
+    <div class="error-banner" id="error-banner" hidden>
+      <span id="error-text"></span>
+      <button type="button" id="error-close">×</button>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
