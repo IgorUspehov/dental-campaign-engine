@@ -264,6 +264,12 @@ async def download_report(filename: str):
     )
 
 
+@app.get("/og-image-de.jpg", include_in_schema=False)
+async def og_image_de():
+    """Картинка для превью ссылки (Open Graph)."""
+    return FileResponse(BASE_DIR / "static" / "og-image-de.jpg", media_type="image/jpeg")
+
+
 @app.get("/health")
 async def health():
     return {"status": "ok", "service": "Dental Campaign Engine"}
